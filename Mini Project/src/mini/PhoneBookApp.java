@@ -46,6 +46,9 @@ public class PhoneBookApp {
 				System.out.println("*               감사합니다                *");
 				System.out.println("****************************************");
 				return;
+			default:
+				System.out.println("[다시 입력해 주세요.]");
+				break;
 
 			}
 			
@@ -68,7 +71,7 @@ public class PhoneBookApp {
 
 		while(it.hasNext()) {
 			PhoneBookVO del = it.next();
-			System.out.printf("%d\t%s\t%d\t%d%n",
+			System.out.printf("%d\t%s\t%s\t%s%n",
 					del.getid(),
 					del.getname(),
 					del.gethp(),
@@ -80,20 +83,20 @@ public class PhoneBookApp {
 	
 	
 	private static void deleteData(Scanner sc) {
-		showList();
+		
 		System.out.print("번호:");
 		int id = sc.nextInt();
 		
 		PhoneBookDAO dao = new PhoneBookDAOImpl();
 		boolean success = dao.delete(Long.valueOf(id));
 		
-		System.out.println("삭제되었습니다."+(success ? "성공":"실패"));
+		System.out.println(success ? "삭제되었습니다":"삭제실패하였습니다");
 		showList();
 			
 	}
 
 	private static void insertData(Scanner sc) {
-		showList();
+	
 	System.out.println("2.<리스트>");
 	System.out.print("이름:");
 	String name = sc.next();
@@ -107,7 +110,7 @@ public class PhoneBookApp {
 	
 	boolean success = dao.insert(vo);
 	
-	System.out.println("INSERT " + (success ? "성공": "실패") );
+	System.out.println (success ? "등록되었습니다": "등록실패하였습니다") ;
 	}
 
 	private static void showList() {
@@ -119,8 +122,14 @@ public class PhoneBookApp {
 		while (it.hasNext()) {
 			PhoneBookVO item = it.next();
 			System.out.println("1.<리스트>");
-			System.out.printf("%d\t%s\t%d\t%d%n", item.getid(), item.getname(), item.gethp(), item.gettel());
+			System.out.printf("%d\t%s\t%s\t%s%n",
+							item.getid(),
+							item.getname(),
+							item.gethp(),
+							item.gettel());}
+				
+
 		}
 	}
 
-}
+

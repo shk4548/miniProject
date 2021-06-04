@@ -76,7 +76,7 @@ public class PhoneBookDAOImpl implements PhoneBookDAO {
 		
 		List<PhoneBookVO> list =new ArrayList<>();
 		
-		String sql ="SELECT id, name, hp, tel FROM PHONE_BOOK Where PHONE_BOOK_name LIKE?";
+		String sql ="SELECT id, name, hp, tel FROM PHONE_BOOK Where name LIKE?";
 	try {
 		conn = getConnection();
 		pstmt = conn.prepareStatement(sql);
@@ -86,10 +86,10 @@ public class PhoneBookDAOImpl implements PhoneBookDAO {
 		rs = pstmt.executeQuery();
 		
 		while(rs.next()) {
-			Long id = rs.getLong("PHONE_BOOK_id");
-			String name =rs.getString("PHONE_BOOK_name");
-			String hp  =rs.getString("PHONE_BOOK_hp");
-			String tel = rs.getString("PHONE_BOOK_tel");
+			Long id = rs.getLong("id");
+			String name =rs.getString("name");
+			String hp  =rs.getString("hp");
+			String tel = rs.getString("tel");
 			
 			PhoneBookVO vo = new PhoneBookVO(id,name,hp,tel);
 			list.add(vo);
@@ -119,8 +119,7 @@ public class PhoneBookDAOImpl implements PhoneBookDAO {
 		
 		try {
 			conn =getConnection();
-			String sql = "SELECT PHONE_BOOK_id, PHONE_BOOK_name, PHONE_BOOK_hp , PHONE_BOOK_tel "+
-						"WHERE PHONE_BOOK_id?";
+			String sql = "SELECT id, name, hp ,tel FROM PHONE_BOOK WHERE id?";
 		pstmt =	conn.prepareStatement(sql);
 		pstmt.setLong(1, id);
 		
@@ -159,7 +158,7 @@ public class PhoneBookDAOImpl implements PhoneBookDAO {
 		try {
 			conn = getConnection();
 			
-			String sql = "INSERT INTO PHONE_BOOK VALUES(SEQ_PHONE_BOOK_id.NEXTVAL, ?, ?, ?)";
+			String sql = "INSERT INTO PHONE_BOOK VALUES(SEQ_PHONE_BOOK_PK.NEXTVAL, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, vo.getname());
@@ -191,9 +190,9 @@ public class PhoneBookDAOImpl implements PhoneBookDAO {
 		
 		try {
 			conn = getConnection();
-			String sql = "DELETE FROM PHONE_BOOK WHERE PHONE_BOOK_id=?";
+			String sql = "DELETE FROM PHONE_BOOK WHERE id=?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setLong(1, id);
+			pstmt.setLong(1 , id);
 			
 			deletedCount = pstmt.executeUpdate();
 		} catch (SQLException e) {

@@ -9,6 +9,7 @@ public interface PhoneBookDAO {
 	public boolean insert(PhoneBookVO vo);
 	public boolean delete(Long id);
 	public boolean update(PhoneBookVO vo);
+	// DAO 프로젝트
 	
 }
 

@@ -4,6 +4,7 @@ package mini;
 //	필드, getter/setter, toString, equals 정도의 메서드만 작성
 //	반드시 기본 생성자가 있어야 함
 //	일반적으로 로직 메서드는 작성하지 않는다
+// VO 프로젝트
 public class PhoneBookVO {
 	private Long id;	//	PK
 	private String name;
